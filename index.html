@@ -368,7 +368,7 @@ let lastSearchTerm = '';
 
 function searchText() {
     const input = document.querySelector('.search-bar').value.toLowerCase();
-    lastSearchTerm = input; // Armazena o termo atual
+    lastSearchTerm = input;
     const skills = document.querySelectorAll('.skill');
     
     skills.forEach(skill => {
@@ -393,27 +393,20 @@ function searchText() {
             contentElement.innerHTML = highlightedContent;
             skill.classList.add('highlighted');
             skill.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            // Adiciona evento de hover aos termos destacados
+            const marks = contentElement.querySelectorAll('mark');
+            marks.forEach(mark => {
+                mark.addEventListener('mouseover', () => {
+                    // Remove o termo da barra de pesquisa
+                    document.querySelector('.search-bar').value = '';
+                    // Atualiza os resultados
+                    searchText();
+                });
+            });
         }
     });
 }
-
-// Adicione estes event listeners para controle do hover
-document.querySelectorAll('.skill').forEach(skill => {
-    skill.addEventListener('mouseenter', () => {
-        // Remove todos os destaques ao entrar em qualquer skill
-        document.querySelectorAll('.skill').forEach(s => {
-            s.classList.remove('highlighted');
-            s.querySelector('.skill-content').innerHTML = s.querySelector('.skill-content').dataset.original;
-        });
-    });
-    
-    skill.addEventListener('mouseleave', () => {
-        // Reaplica a pesquisa ao sair da skill
-        if (lastSearchTerm) {
-            searchText();
-        }
-    });
-});
 
     </script>
 </body>
