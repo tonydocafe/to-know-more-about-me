@@ -26,13 +26,25 @@
             position: relative;
         }
 
+        .search-bar {
+            position: absolute;
+            top: 500px;
+            left: 150px;
+            width: 200px;
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+
         .button {
             margin-top: auto;  
             padding: 10px 20px;
             font-size: 18px;
             border: none;
-            background-color: white;
-            color: black;
+            background-color: black;
+            color: white;
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s;
@@ -74,7 +86,7 @@
 
         .tooltip {
             position: absolute;
-            left: 60px;
+            left: 56px;
             background-color: white;
             color: black;
             font-size: 14px;
@@ -109,97 +121,85 @@
     height: 100%; /* Para garantir que o container ocupe toda a altura */
 }
 
-.skill-1 {
-    background-color: white;
-    color: black;
-    width: 150px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
-    overflow: hidden;
-    position: absolute;
-    top: 25px; /* 25px do topo */
-    left: 25px; /* 25px da esquerda */
-}
+        .skill {
+            background-color: rgba(247, 247, 247, 0.099);
+            color:whitesmoke;
+            width: 150px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
+            overflow: hidden;
+            position: absolute;
+        }
 
-.skill-2 {
-    background-color: white;
-    color: black;
-    width: 150px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
-    overflow: hidden;
-    position: absolute;
-    bottom: 25px; /* 25px da parte inferior */
-    left: 25px; /* 25px da esquerda */
-}
+        .skill-1 {
+            top: 25px;
+            left: 250px;
 
-.skill-3 {
-    background-color: white;
-    color: black;
-    width: 150px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
-    overflow: hidden;
-    position: absolute;
-    top: 25px; /* 25px do topo */
-    right: 25px; /* 25px da direita */
-}
+        }
 
-.skill-4 {
-    background-color: white;
-    color: black;
-    width: 150px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
-    overflow: hidden;
-    position: absolute;
-    bottom: 25px; /* 25px da parte inferior */
-    right: 25px; /* 25px da direita */
-}
+        .skill-2 {
+            bottom: 25px;
+            left: 250px;
+        }
 
+        .skill-3 {
+            top: 25px;
+            right: 250px;
+        }
 
-/* Aplica a transição de hover nas habilidades específicas */
-.skill-1:hover, .skill-2:hover, .skill-3:hover, .skill-4:hover {
-    transform: scale(1.7);
-    height: 300px;
-    width: 300px;
-    
-}
-
+        .skill-4 {
+            bottom: 25px;
+            right: 250px;
+        }
+        
+        .skill-title {
+            font-size: 1.2rem; /* Tamanho inicial do texto estático */
+            transition: all 0.3s ease;
+            position: absolute;
+        }
 
         .skill-content {
-            opacity: 100;
+            opacity: 0;
+            transition: all 0.3s ease;
+            padding: 20px;
+            text-align: justify;
+
+        }
+
+        .skill:hover .skill-title {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+
+        .skill:hover .skill-content {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+        .skill:hover {
+            transform: scale(1.7);
+            height: 300px;
+            width: 300px;
+        }
+
+        /* Ajuste de opacidade da frase */
+        .skill-content span {
+            display: block;
+            opacity: 1;
             transition: opacity 0.3s ease;
         }
 
-        .skill:hover .skill-content {
-            opacity: 100;
+        .skill:hover .skill-content span {
+            opacity: 0;
         }
-
         /* Ícone redondo abaixo do texto na segunda página */
         .icon-below-text {
             width: 100px;
@@ -214,6 +214,7 @@
 <body>
     <div class="container">
         <div class="page">
+            <input type="text" class="search-bar" placeholder="Buscar..." onkeyup="searchText()">
             Como posso conversar com você?
             <div class="social-icons">
                 <div class="social-icon">
@@ -252,20 +253,20 @@
                         <!-- Ícone abaixo do texto -->
                         <img src="images/i.jpeg" alt="Ícone" class="icon-below-text">
             <div class="skill-container">
-                <div class="skill-1">
-                    Habilidade 1
+                <div class="skill skill-1">
+                    <span class="skill-title">Habilidade 1</span>
                     <div class="skill-content">Texto da habilidade 1...</div>
                 </div>
-                <div class="skill-2">
-                    Habilidade 2
+                <div class="skill skill-2">
+                    <span class="skill-title">Habilidade 1</span>
                     <div class="skill-content">Texto da habilidade 2...</div>
                 </div>
-                <div class="skill-3">
-                    Habilidade 3
+                <div class="skill skill-3">
+                    <span class="skill-title">Habilidade 1</span>
                     <div class="skill-content">Texto da habilidade 3...</div>
                 </div>
-                <div class="skill-4">
-                    Habilidade 4
+                <div class="skill skill-4">
+                    <span class="skill-title">Habilidade 1</span>
                     <div class="skill-content">Texto da habilidade 4...</div>
                 </div>
             </div>
@@ -299,6 +300,19 @@
                 scrollToPage(currentIndex - 1);
             }
         });
+        function searchText() {
+            let input = document.querySelector('.search-bar').value.toLowerCase();
+            let pages = document.querySelectorAll('.page');
+            
+            pages.forEach(page => {
+                if (page.innerText.toLowerCase().includes(input)) {
+                    page.style.display = 'flex';
+                } else {
+                    page.style.display = 'none';
+                }
+            });
+        }
+
     </script>
 </body>
 </html>
