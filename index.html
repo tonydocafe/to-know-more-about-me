@@ -363,8 +363,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Adicione esta variável no início do script
+let lastSearchTerm = '';
+
 function searchText() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
+    const input = document.querySelector('.search-bar').value.toLowerCase();
+    lastSearchTerm = input; // Armazena o termo atual
     const skills = document.querySelectorAll('.skill');
     
     skills.forEach(skill => {
@@ -372,13 +376,11 @@ function searchText() {
         const originalContent = contentElement.dataset.original;
         const contentText = originalContent.toLowerCase();
         
-        // Restaura o conteúdo original antes de cada busca
         contentElement.innerHTML = originalContent;
         skill.classList.remove('highlighted');
 
         if (!input) {
-            // Reset completo para estado inicial
-            skill.style.cssText = ''; // Limpa todos estilos inline
+            skill.style.cssText = '';
             return;
         }
 
@@ -394,6 +396,24 @@ function searchText() {
         }
     });
 }
+
+// Adicione estes event listeners para controle do hover
+document.querySelectorAll('.skill').forEach(skill => {
+    skill.addEventListener('mouseenter', () => {
+        // Remove todos os destaques ao entrar em qualquer skill
+        document.querySelectorAll('.skill').forEach(s => {
+            s.classList.remove('highlighted');
+            s.querySelector('.skill-content').innerHTML = s.querySelector('.skill-content').dataset.original;
+        });
+    });
+    
+    skill.addEventListener('mouseleave', () => {
+        // Reaplica a pesquisa ao sair da skill
+        if (lastSearchTerm) {
+            searchText();
+        }
+    });
+});
 
     </script>
 </body>
