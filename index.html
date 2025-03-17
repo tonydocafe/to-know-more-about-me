@@ -354,9 +354,14 @@ function searchText() {
         // Restaura o conteúdo original antes de cada busca
         contentElement.innerHTML = originalContent;
         skill.classList.remove('highlighted');
-        contentElement.style.opacity = '0';
 
-        if (input && contentText.includes(input)) {
+        if (!input) {
+            // Reset completo para estado inicial
+            skill.style.cssText = ''; // Limpa todos estilos inline
+            return;
+        }
+
+        if (contentText.includes(input)) {
             const highlightedContent = originalContent.replace(
                 new RegExp(input, 'gi'), 
                 match => `<mark>${match}</mark>`
@@ -364,12 +369,10 @@ function searchText() {
             
             contentElement.innerHTML = highlightedContent;
             skill.classList.add('highlighted');
-            contentElement.style.opacity = '1';
             skill.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });
 }
-
 
     </script>
 </body>
