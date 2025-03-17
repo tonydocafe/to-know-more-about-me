@@ -27,16 +27,36 @@
         }
 
         .search-bar {
-            position: absolute;
-            top: 500px;
-            left: 150px;
-            width: 200px;
-            height: 40px;
-            padding: 5px 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: none;
-        }
+    position: absolute;
+    top: 500px;
+    left: 150px;
+    width: 180px; /* Reduzi para dar espaço ao botão */
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
+    border: none;
+}
+
+.search-button {
+    position: absolute;
+    top: 500px;
+    left: 330px; /* 150 + 180 = 330 */
+    width: 100px;
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 0 5px 5px 0; /* Borda arredondada à direita */
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
 
         .button {
             margin-top: auto;  
@@ -246,7 +266,8 @@ mark {
 <body>
     <div class="container">
         <div class="page">
-            <input type="text" class="search-bar" placeholder="Buscar..." onkeyup="searchText()">
+            <input type="text" class="search-bar" placeholder="Buscar..." id="searchInput">
+<button class="search-button" onclick="searchText()">Pesquisar</button>
             Como posso conversar com você?
             <div class="social-icons">
                 <div class="social-icon">
@@ -343,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function searchText() {
-    const input = document.querySelector('.search-bar').value.toLowerCase();
+    const input = document.getElementById('searchInput').value.toLowerCase();
     const skills = document.querySelectorAll('.skill');
     
     skills.forEach(skill => {
