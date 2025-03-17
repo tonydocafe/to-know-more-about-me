@@ -200,6 +200,38 @@
         .skill:hover .skill-content span {
             opacity: 0;
         }
+
+
+
+        /* Classe para simular o hover via JS */
+.skill.highlighted {
+    transform: scale(1.7);
+    height: 300px;
+    width: 300px;
+}
+
+.skill.highlighted .skill-title {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.skill.highlighted .skill-content {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Garante que o mark tenha contraste */
+mark {
+    background-color: yellow;
+    color: black;
+}
+
+
+
+
+
+
+
         /* Ícone redondo abaixo do texto na segunda página */
         .icon-below-text {
             width: 100px;
@@ -303,44 +335,40 @@
       
       
       
-        function searchText() {
-    let input = document.querySelector('.search-bar').value.toLowerCase();
-    let skills = document.querySelectorAll('.skill');
-    let found = false;
+// Armazena o conteúdo original ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.skill-content').forEach(content => {
+        content.dataset.original = content.innerHTML;
+    });
+});
 
+function searchText() {
+    const input = document.querySelector('.search-bar').value.toLowerCase();
+    const skills = document.querySelectorAll('.skill');
+    
     skills.forEach(skill => {
-        let skillText = skill.textContent.toLowerCase();
-        let originalText = skill.textContent;
+        const contentElement = skill.querySelector('.skill-content');
+        const originalContent = contentElement.dataset.original;
+        const contentText = originalContent.toLowerCase();
+        
+        // Restaura o conteúdo original antes de cada busca
+        contentElement.innerHTML = originalContent;
+        skill.classList.remove('highlighted');
+        contentElement.style.opacity = '0';
 
-        if (input === "") {
-            skill.querySelector('.skill-content').innerHTML = originalText; // Restaura o texto original
-            skill.querySelector('.skill-content').style.opacity = "0"; // Esconde o texto
-        } else if (skillText.includes(input)) {
-            found = true;
-
-            // Substitui a palavra correspondente com uma tag <mark> para destacá-la
-            let highlightedText = originalText.replace(new RegExp(input, 'gi'), match => `<mark>${match}</mark>`);
-            skill.querySelector('.skill-content').innerHTML = highlightedText; // Aplica o texto destacado
-            skill.querySelector('.skill-content').style.opacity = "1"; // Revela o texto
-
-            // Mover o foco para a skill encontrada
-            skill.scrollIntoView({ behavior: "smooth", block: "center" });
-
-            // Adicionar o foco (caso queira ativar o mouse sobre a skill)
-            skill.focus();
-        } else {
-            skill.querySelector('.skill-content').innerHTML = originalText; // Restaura o texto original
-            skill.querySelector('.skill-content').style.opacity = "0"; // Esconde o texto
+        if (input && contentText.includes(input)) {
+            const highlightedContent = originalContent.replace(
+                new RegExp(input, 'gi'), 
+                match => `<mark>${match}</mark>`
+            );
+            
+            contentElement.innerHTML = highlightedContent;
+            skill.classList.add('highlighted');
+            contentElement.style.opacity = '1';
+            skill.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     });
-
-    // Caso nenhuma skill tenha sido encontrada, remover qualquer realce
-    if (!found) {
-        skills.forEach(skill => skill.querySelector('.skill-content').innerHTML = skill.textContent);
-    }
 }
-
-
 
 
     </script>
