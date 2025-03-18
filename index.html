@@ -223,7 +223,7 @@
 
 
 
-        /* Classe para simular o hover via JS */
+/* Classe para simular o hover via JS */
 .skill.highlighted {
     transform: scale(1.7);
     height: 300px;
@@ -248,7 +248,23 @@ mark {
 
 
 
+.navigation-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
 
+.navigation-controls button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 
 
@@ -322,6 +338,10 @@ mark {
                     <span class="skill-title">Habilidade 1</span>
                     <div class="skill-content">Texto da habilidade 4...</div>
                 </div>
+                <div class="navigation-controls">
+                    <button onclick="previousMatch()">← Anterior</button>
+                    <button onclick="nextMatch()">Próximo →</button>
+                </div>
             </div>
 
             <button class="button" onclick="scrollToPage(0)">Contate-me</button>
@@ -365,12 +385,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
+
+// ----------MARCA O TEXTO---------
+let currentMatchIndex = -1; // Índice da correspondência atual
+let allMatches = []; // Armazena todas as correspondências (skills ou marcas)
+
 function highlightMatches(skill, input) {
     const contentElement = skill.querySelector('.skill-content');
     const originalContent = contentElement.dataset.original;
     const contentText = originalContent.toLowerCase();
     
-    // Restaura o conteúdo original
     contentElement.innerHTML = originalContent;
     skill.classList.remove('highlighted');
 
@@ -379,7 +407,6 @@ function highlightMatches(skill, input) {
         return;
     }
 
-    // Se o conteúdo contiver o texto pesquisado, destaca
     if (contentText.includes(input)) {
         const highlightedContent = originalContent.replace(
             new RegExp(input, 'gi'),
@@ -388,29 +415,65 @@ function highlightMatches(skill, input) {
 
         contentElement.innerHTML = highlightedContent;
         skill.classList.add('highlighted');
-        skill.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-        // Adiciona evento para limpar a busca ao passar o mouse
-        const marks = contentElement.querySelectorAll('mark');
-        marks.forEach(mark => {
-            mark.addEventListener('mouseover', () => {
-                document.querySelector('.search-bar').value = '';
-                searchText();
-            });
-        });
+        // Coletar todas as skills correspondentes (ou marcas)
+        allMatches.push(skill); // Ou colete as tags <mark> aqui
     }
 }
 
+
+
+
+
+
+
+
+
 let lastSearchTerm = '';
+
+//--------------PROCURAR TEXTO-------------------------------------
 function searchText() {
     const input = document.querySelector('.search-bar').value.toLowerCase();
     lastSearchTerm = input;
     const skills = document.querySelectorAll('.skill');
 
+    // Resetar variáveis
+    currentMatchIndex = -1;
+    allMatches = [];
+    
     skills.forEach(skill => highlightMatches(skill, input));
+
+    // Se houver correspondências, destacar a primeira
+    if (allMatches.length > 0) {
+        currentMatchIndex = 0;
+        highlightCurrentMatch();
+    }
 }
 
+//-----------------------------------------------------
 
+
+function highlightCurrentMatch() {
+    // Remover destaque de todas
+    allMatches.forEach(skill => skill.classList.remove('highlighted'));
+    
+    // Destacar a atual
+    const currentSkill = allMatches[currentMatchIndex];
+    currentSkill.classList.add('highlighted');
+    currentSkill.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function nextMatch() {
+    if (allMatches.length === 0) return;
+    currentMatchIndex = (currentMatchIndex + 1) % allMatches.length;
+    highlightCurrentMatch();
+}
+
+function previousMatch() {
+    if (allMatches.length === 0) return;
+    currentMatchIndex = (currentMatchIndex - 1 + allMatches.length) % allMatches.length;
+    highlightCurrentMatch();
+}
     </script>
 </body>
 </html>
