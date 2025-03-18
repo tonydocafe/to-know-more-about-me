@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Páginas Roláveis</title>
+    <title>Páginas</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -363,50 +363,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Adicione esta variável no início do script
-let lastSearchTerm = '';
 
+
+function highlightMatches(skill, input) {
+    const contentElement = skill.querySelector('.skill-content');
+    const originalContent = contentElement.dataset.original;
+    const contentText = originalContent.toLowerCase();
+    
+    // Restaura o conteúdo original
+    contentElement.innerHTML = originalContent;
+    skill.classList.remove('highlighted');
+
+    if (!input) {
+        skill.style.cssText = '';
+        return;
+    }
+
+    // Se o conteúdo contiver o texto pesquisado, destaca
+    if (contentText.includes(input)) {
+        const highlightedContent = originalContent.replace(
+            new RegExp(input, 'gi'),
+            match => `<mark>${match}</mark>`
+        );
+
+        contentElement.innerHTML = highlightedContent;
+        skill.classList.add('highlighted');
+        skill.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        // Adiciona evento para limpar a busca ao passar o mouse
+        const marks = contentElement.querySelectorAll('mark');
+        marks.forEach(mark => {
+            mark.addEventListener('mouseover', () => {
+                document.querySelector('.search-bar').value = '';
+                searchText();
+            });
+        });
+    }
+}
+
+let lastSearchTerm = '';
 function searchText() {
     const input = document.querySelector('.search-bar').value.toLowerCase();
     lastSearchTerm = input;
     const skills = document.querySelectorAll('.skill');
-    
-    skills.forEach(skill => {
-        const contentElement = skill.querySelector('.skill-content');
-        const originalContent = contentElement.dataset.original;
-        const contentText = originalContent.toLowerCase();
-        
-        contentElement.innerHTML = originalContent;
-        skill.classList.remove('highlighted');
 
-        if (!input) {
-            skill.style.cssText = '';
-            return;
-        }
-
-        if (contentText.includes(input)) {
-            const highlightedContent = originalContent.replace(
-                new RegExp(input, 'gi'), 
-                match => `<mark>${match}</mark>`
-            );
-            
-            contentElement.innerHTML = highlightedContent;
-            skill.classList.add('highlighted');
-            skill.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            // Adiciona evento de hover aos termos destacados
-            const marks = contentElement.querySelectorAll('mark');
-            marks.forEach(mark => {
-                mark.addEventListener('mouseover', () => {
-                    // Remove o termo da barra de pesquisa
-                    document.querySelector('.search-bar').value = '';
-                    // Atualiza os resultados
-                    searchText();
-                });
-            });
-        }
-    });
+    skills.forEach(skill => highlightMatches(skill, input));
 }
+
 
     </script>
 </body>
