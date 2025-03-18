@@ -223,7 +223,7 @@
 
 
 
-/* Classe para simular o hover via JS */
+        /* Classe para simular o hover via JS */
 .skill.highlighted {
     transform: scale(1.7);
     height: 300px;
@@ -248,23 +248,7 @@ mark {
 
 
 
-.navigation-controls {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-}
 
-.navigation-controls button {
-    padding: 8px 16px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
 
 
@@ -338,10 +322,6 @@ mark {
                     <span class="skill-title">Habilidade 1</span>
                     <div class="skill-content">Texto da habilidade 4...</div>
                 </div>
-                <div class="navigation-controls">
-                    <button onclick="previousMatch()">← Anterior</button>
-                    <button onclick="nextMatch()">Próximo →</button>
-                </div>
             </div>
 
             <button class="button" onclick="scrollToPage(0)">Contate-me</button>
@@ -383,16 +363,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// PARA REMOVER HOVER ----------------------------------
 
-
-
-
-
-
-
-// ----------MARCA O TEXTO---------
 let currentMatchIndex = -1; // Índice da correspondência atual
 let allMatches = []; // Armazena todas as correspondências (skills ou marcas)
+
 
 function highlightMatches(skill, input) {
     const contentElement = skill.querySelector('.skill-content');
@@ -419,38 +394,34 @@ function highlightMatches(skill, input) {
         // Coletar todas as skills correspondentes (ou marcas)
         allMatches.push(skill); // Ou colete as tags <mark> aqui
     }
+
+    
+// Adiciona evento para limpar a busca ao passar o mouse
+const marks = contentElement.querySelectorAll('mark');
+        marks.forEach(mark => {
+            mark.addEventListener('mouseover', () => {
+                document.querySelector('.search-bar').value = '';
+                searchText();
+            });
+        });
 }
 
-
-
-
-
-
-
-
-
-let lastSearchTerm = '';
-
-//--------------PROCURAR TEXTO-------------------------------------
 function searchText() {
     const input = document.querySelector('.search-bar').value.toLowerCase();
     lastSearchTerm = input;
     const skills = document.querySelectorAll('.skill');
 
-    // Resetar variáveis
     currentMatchIndex = -1;
     allMatches = [];
     
     skills.forEach(skill => highlightMatches(skill, input));
 
-    // Se houver correspondências, destacar a primeira
+    // Destacar a primeira correspondência automaticamente
     if (allMatches.length > 0) {
         currentMatchIndex = 0;
         highlightCurrentMatch();
     }
 }
-
-//-----------------------------------------------------
 
 
 function highlightCurrentMatch() {
@@ -474,6 +445,23 @@ function previousMatch() {
     currentMatchIndex = (currentMatchIndex - 1 + allMatches.length) % allMatches.length;
     highlightCurrentMatch();
 }
+
+
+// Adicione este evento ao final do seu script
+document.addEventListener('keydown', (e) => {
+    // Só permite navegação se houver correspondências
+    if (allMatches.length === 0) return;
+
+    // Tecla ← (Anterior)
+    if (e.key === 'ArrowLeft') {
+        previousMatch();
+    } 
+    // Tecla → (Próximo)
+    else if (e.key === 'ArrowRight') {
+        nextMatch();
+    }
+});
+
     </script>
 </body>
 </html>
