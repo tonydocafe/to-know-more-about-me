@@ -242,14 +242,27 @@
 
 /* Garante que o mark tenha contraste */
 mark {
-    background-color: yellow;
+    background-color: #ffeb3b;
     color: black;
+    padding: 2px 4px;
+    border-radius: 3px;
 }
 
 
-
-
-
+.search-counter {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    font-size: 14px;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s;
+}
 
 
         /* Ícone redondo abaixo do texto na segunda página */
@@ -308,11 +321,11 @@ mark {
             <div class="skill-container">
                 <div class="skill skill-1">
                     <span class="skill-title">Habilidade 1</span>
-                    <div class="skill-content">Texto da habilidade 1...</div>
+                    <div class="skill-content">Texto da habilidade 1 oi ..</div>
                 </div>
                 <div class="skill skill-2">
                     <span class="skill-title">Habilidade 1</span>
-                    <div class="skill-content">Texto da habilidade 2...</div>
+                    <div class="skill-content">Texto da habilidade 2 oi ...</div>
                 </div>
                 <div class="skill skill-3">
                     <span class="skill-title">Habilidade 1</span>
@@ -326,6 +339,7 @@ mark {
 
             <button class="button" onclick="scrollToPage(0)">Contate-me</button>
         </div>
+        <div class="search-counter" id="searchCounter"></div>
     </div>
 
     <script>
@@ -395,7 +409,7 @@ function highlightMatches(skill, input) {
         allMatches.push(skill); // Ou colete as tags <mark> aqui
     }
 
-    
+
 // Adiciona evento para limpar a busca ao passar o mouse
 const marks = contentElement.querySelectorAll('mark');
         marks.forEach(mark => {
@@ -404,23 +418,6 @@ const marks = contentElement.querySelectorAll('mark');
                 searchText();
             });
         });
-}
-
-function searchText() {
-    const input = document.querySelector('.search-bar').value.toLowerCase();
-    lastSearchTerm = input;
-    const skills = document.querySelectorAll('.skill');
-
-    currentMatchIndex = -1;
-    allMatches = [];
-    
-    skills.forEach(skill => highlightMatches(skill, input));
-
-    // Destacar a primeira correspondência automaticamente
-    if (allMatches.length > 0) {
-        currentMatchIndex = 0;
-        highlightCurrentMatch();
-    }
 }
 
 
@@ -434,18 +431,57 @@ function highlightCurrentMatch() {
     currentSkill.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+
+// Adicione estas variáveis no início do script
+let totalMatches = 0;
+
+// Atualize a função searchText
+function searchText() {
+    const input = document.querySelector('.search-bar').value.toLowerCase();
+    const skills = document.querySelectorAll('.skill');
+    const counter = document.getElementById('searchCounter');
+
+    currentMatchIndex = -1;
+    allMatches = [];
+    
+    skills.forEach(skill => highlightMatches(skill, input));
+
+    totalMatches = allMatches.length;
+    
+    if(totalMatches > 0) {
+        currentMatchIndex = 0;
+        highlightCurrentMatch();
+        counter.style.display = 'block';
+        updateCounter();
+    } else {
+        counter.style.display = 'none';
+    }
+}
+
+// Crie esta nova função para atualizar o contador
+function updateCounter() {
+    const counter = document.getElementById('searchCounter');
+    if(totalMatches === 0) {
+        counter.style.display = 'none';
+        return;
+    }
+    counter.textContent = `${currentMatchIndex + 1}/${totalMatches}`;
+}
+
+// Atualize as funções de navegação
 function nextMatch() {
-    if (allMatches.length === 0) return;
-    currentMatchIndex = (currentMatchIndex + 1) % allMatches.length;
+    if (totalMatches === 0) return;
+    currentMatchIndex = (currentMatchIndex + 1) % totalMatches;
     highlightCurrentMatch();
+    updateCounter();
 }
 
 function previousMatch() {
-    if (allMatches.length === 0) return;
-    currentMatchIndex = (currentMatchIndex - 1 + allMatches.length) % allMatches.length;
+    if (totalMatches === 0) return;
+    currentMatchIndex = (currentMatchIndex - 1 + totalMatches) % totalMatches;
     highlightCurrentMatch();
+    updateCounter();
 }
-
 
 // Adicione este evento ao final do seu script
 document.addEventListener('keydown', (e) => {
