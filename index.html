@@ -320,6 +320,32 @@ mark {
             object-fit: cover; /* Garante que a imagem ocupe o espaço de forma adequada */
         }
 
+
+    /* Controle de tamanho dos títulos */
+h1[data-i18n] {
+    font-size: 2.5rem; /* Tamanho base */
+    line-height: 1.2;
+    max-width: 90%;
+    margin: 0 auto 20px;
+    word-wrap: break-word;
+}
+.main-title {
+    font-size: clamp(2rem, 5vw, 3rem); /* Tamanho fluído entre 2rem e 3rem */
+}
+
+/* Tamanho responsivo */
+@media (max-width: 768px) {
+    h1[data-i18n] {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1[data-i18n] {
+        font-size: 1.7rem;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -331,7 +357,7 @@ mark {
             <input type="text" class="search-bar" id="searchInput">
             <button class="search-button" onclick="searchText()"></button>
             
-            <h1 data-i18n="page1_title"></h1>
+            <h1 class="main-title" data-i18n="page1_title"></h1>
             
             <div class="social-icons">
                 <div class="social-icon">
@@ -363,7 +389,7 @@ mark {
         </div>
 
         <div class="page">
-            <h1 data-i18n="page2_title"></h1>
+            <h1 class="main-title" data-i18n="page2_title"></h1>
             <img src="images/i.jpeg" alt="Ícone" class="icon-below-text">
             
             <div class="skill-container">
