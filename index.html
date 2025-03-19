@@ -539,6 +539,14 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchText();
+    }
+});
+
+
     </script>
 </body>
 </html>
