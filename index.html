@@ -324,91 +324,173 @@ mark {
 </head>
 <body>
     <div class="container">
-        
         <div class="page">
             <div id="languageToggle">
                 <button onclick="toggleLanguage()">EN/PT</button>
             </div>
-            <input type="text" class="search-bar" placeholder="Buscar..." id="searchInput">
-<button class="search-button" onclick="searchText()">Pesquisar</button>
-            Como posso conversar com você?
+            <input type="text" class="search-bar" id="searchInput">
+            <button class="search-button" onclick="searchText()"></button>
+            
+            <h1 data-i18n="page1_title"></h1>
+            
             <div class="social-icons">
                 <div class="social-icon">
                     <a href="https://www.instagram.com" target="_blank">
                         <img src="images/insta.png" alt="Instagram">
                     </a>
-                    <div class="tooltip">instagram.com</div>
+                    <div class="tooltip" data-i18n="instagram_tooltip"></div>
                 </div>
                 <div class="social-icon">
                     <a href="https://www.linkedin.com" target="_blank">
                         <img src="images/link.png" alt="LinkedIn">
                     </a>
-                    <div class="tooltip">linkedin.com</div>
+                    <div class="tooltip" data-i18n="linkedin_tooltip"></div>
                 </div>
                 <div class="social-icon">
                     <a href="https://www.whatsapp.com" target="_blank">
                         <img src="images/wpp.png" alt="WhatsApp">
                     </a>
-                    <div class="tooltip">whatsapp.com</div>
+                    <div class="tooltip" data-i18n="whatsapp_tooltip"></div>
                 </div>
                 <div class="social-icon">
                     <a href="mailto:example@gmail.com" target="_blank">
                         <img src="images/email.png" alt="Gmail">
                     </a>
-                    <div class="tooltip">example@gmail.com</div>
+                    <div class="tooltip" data-i18n="email_tooltip"></div>
                 </div>
             </div>
-            <button class="button" onclick="scrollToPage(1)">Sobre mim...</button>
+            <button class="button" onclick="scrollToPage(1)" data-i18n="about_button"></button>
         </div>
 
         <div class="page">
-            <!-- Habilidades com expansão -->
+            <h1 data-i18n="page2_title"></h1>
+            <img src="images/i.jpeg" alt="Ícone" class="icon-below-text">
             
-                        O que posso fazer por você? 
-                        
-                        <!-- Ícone abaixo do texto -->
-                        <img src="images/i.jpeg" alt="Ícone" class="icon-below-text">
             <div class="skill-container">
                 <div class="skill skill-1">
-                    <span class="skill-title">Habilidade 1</span>
-                    <div class="skill-content">Texto da habilidade 1 oi ..</div>
+                    <span class="skill-title" data-i18n="skill1_title"></span>
+                    <div class="skill-content">Texto da habilidade 1...</div>
                 </div>
                 <div class="skill skill-2">
-                    <span class="skill-title">Habilidade 1</span>
-                    <div class="skill-content">Este é o texto grande da caixa dois. Ele é um texto realmente muito grande, extenso e detalhado, ocupando bastante espaço e garantindo que a caixa dois esteja completamente preenchida com conteúdo. Se há algo que define esse texto, é o fato de ele ser grande, longo e expansivo, proporcionando uma leitura prolongada e garantindo que qualquer pessoa que o leia perceba imediatamente sua grandiosidade.
-
-                        O tamanho deste texto não é uma coincidência; ele foi criado para ser grande, para ocupar espaço e para demonstrar sua extensão de maneira clara e inquestionável. A caixa dois, que o abriga, precisa de um texto que seja compatível com sua capacidade, e este texto cumpre exatamente essa função. Se fosse um texto pequeno, curto ou breve, não faria jus à grandiosidade que a caixa dois exige.
-                        
-                        Portanto, ao longo de suas múltiplas linhas e incontáveis palavras, este texto reafirma sua principal característica: ele é grande. Tão grande que, ao continuar lendo, você percebe que ele não tem pressa para acabar. Ele se expande, se desenvolve e se alonga, garantindo que a caixa dois esteja devidamente preenchida com algo à altura de sua magnitude.
-                        
-                        Se alguém perguntasse qual é o principal atributo deste texto, a resposta seria simples e direta: ele é grande. Seu tamanho é sua identidade, sua marca registrada, sua razão de existir. E assim, ele continua, linha após linha, reforçando sua grandiosidade, sua extensão, sua abrangência e sua presença dominante na caixa dois.
-                        
-                        Este é, sem sombra de dúvidas, o maior texto que poderia ocupar a caixa dois. E ele continua. Pois sua missão é clara: ser grande, muito grande, e preencher cada espaço disponível, garantindo que ninguém jamais esqueça que este é o texto grande da caixa dois.
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        </div>
+                    <span class="skill-title" data-i18n="skill2_title"></span>
+                    <div class="skill-content">[Texto grande]</div>
                 </div>
                 <div class="skill skill-3">
-                    <span class="skill-title">Habilidade 1</span>
+                    <span class="skill-title" data-i18n="skill3_title"></span>
                     <div class="skill-content">Texto da habilidade 3...</div>
                 </div>
                 <div class="skill skill-4">
-                    <span class="skill-title">Habilidade 1</span>
+                    <span class="skill-title" data-i18n="skill4_title"></span>
                     <div class="skill-content">Texto da habilidade 4...</div>
                 </div>
             </div>
 
-            <button class="button" onclick="scrollToPage(0)">Contate-me</button>
+            <button class="button" onclick="scrollToPage(0)" data-i18n="contact_button"></button>
         </div>
         <div class="search-counter" id="searchCounter"></div>
     </div>
 
     <script>
+
+
+
+// Adicione no início do script
+let currentLang = 'pt'; // Idioma padrão
+const translations = {
+    // Página 1
+    "page1_title": {
+        "en": "How can I talk to you?",
+        "pt": "Como posso conversar com você?"
+    },
+    "search_placeholder": {
+        "en": "Search...",
+        "pt": "Buscar..."
+    },
+    "search_button": {
+        "en": "Search",
+        "pt": "Pesquisar"
+    },
+    "contact_button": {
+        "en": "Contact me",
+        "pt": "Contate-me"
+    },
+    "about_button": {
+        "en": "About me...",
+        "pt": "Sobre mim..."
+    },
+    
+    // Página 2
+    "page2_title": {
+        "en": "What can I do for you?",
+        "pt": "O que posso fazer por você?"
+    },
+    "skill1_title": {
+        "en": "Skill 1",
+        "pt": "Habilidade 1"
+    },
+    "skill2_title": {
+        "en": "Skill 2",
+        "pt": "Habilidade 2"
+    },
+    "skill3_title": {
+        "en": "Skill 3",
+        "pt": "Habilidade 3"
+    },
+    "skill4_title": {
+        "en": "Skill 4",
+        "pt": "Habilidade 4"
+    },
+    
+    // Tooltips
+    "instagram_tooltip": {
+        "en": "Visit Instagram",
+        "pt": "Acesse o Instagram"
+    },
+    "linkedin_tooltip": {
+        "en": "Visit LinkedIn",
+        "pt": "Acesse o LinkedIn"
+    },
+    "whatsapp_tooltip": {
+        "en": "Chat on WhatsApp",
+        "pt": "Conversar no WhatsApp"
+    },
+    "email_tooltip": {
+        "en": "Send email",
+        "pt": "Enviar e-mail"
+    }
+};
+
+function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'pt' : 'en';
+    translatePage();
+    localStorage.setItem('siteLanguage', currentLang);
+}
+
+function translatePage() {
+    // Elementos com textos traduzíveis
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.dataset.i18n;
+        if (translations[key]) {
+            element.textContent = translations[key][currentLang];
+        }
+    });
+
+    // Elementos especiais (placeholder, botão de pesquisa)
+    document.getElementById('searchInput').placeholder = translations['search_placeholder'][currentLang];
+    document.querySelector('.search-button').textContent = translations['search_button'][currentLang];
+}
+
+// Inicializar tradução ao carregar
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('siteLanguage');
+    if (savedLang) currentLang = savedLang;
+    translatePage();
+});
+
+
+
+
+//-----------------------PURO-----------------------------------------
         let isScrolling = false;
         let currentIndex = 0;
         const pages = document.querySelectorAll(".page");
@@ -443,6 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//-------------------------------------------------------------------------------------------------
 // PARA REMOVER HOVER ----------------------------------
 
 let currentMatchIndex = -1; // Índice da correspondência atual
