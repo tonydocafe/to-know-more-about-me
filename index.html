@@ -185,12 +185,37 @@
         }
 
         .skill-content {
-            opacity: 0;
-            transition: all 0.3s ease;
-            padding: 20px;
-            text-align: justify;
+    opacity: 0;
+    transition: all 0.3s ease;
+    padding: 20px;
+    text-align: justify;
+    /* Novas regras para rolagem */
+    overflow-y: auto;
+    max-height: 200px;
+    width: 100%;
+    pointer-events: auto;
+    margin-top: 10px;
+}
 
-        }
+/* Personalização da scrollbar */
+.skill-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.skill-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.skill-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+}
+
+.skill-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
 
         .skill:hover .skill-title {
             opacity: 0;
@@ -325,7 +350,23 @@ mark {
                 </div>
                 <div class="skill skill-2">
                     <span class="skill-title">Habilidade 1</span>
-                    <div class="skill-content">Texto da habilidade 2 oi ...</div>
+                    <div class="skill-content">Este é o texto grande da caixa dois. Ele é um texto realmente muito grande, extenso e detalhado, ocupando bastante espaço e garantindo que a caixa dois esteja completamente preenchida com conteúdo. Se há algo que define esse texto, é o fato de ele ser grande, longo e expansivo, proporcionando uma leitura prolongada e garantindo que qualquer pessoa que o leia perceba imediatamente sua grandiosidade.
+
+                        O tamanho deste texto não é uma coincidência; ele foi criado para ser grande, para ocupar espaço e para demonstrar sua extensão de maneira clara e inquestionável. A caixa dois, que o abriga, precisa de um texto que seja compatível com sua capacidade, e este texto cumpre exatamente essa função. Se fosse um texto pequeno, curto ou breve, não faria jus à grandiosidade que a caixa dois exige.
+                        
+                        Portanto, ao longo de suas múltiplas linhas e incontáveis palavras, este texto reafirma sua principal característica: ele é grande. Tão grande que, ao continuar lendo, você percebe que ele não tem pressa para acabar. Ele se expande, se desenvolve e se alonga, garantindo que a caixa dois esteja devidamente preenchida com algo à altura de sua magnitude.
+                        
+                        Se alguém perguntasse qual é o principal atributo deste texto, a resposta seria simples e direta: ele é grande. Seu tamanho é sua identidade, sua marca registrada, sua razão de existir. E assim, ele continua, linha após linha, reforçando sua grandiosidade, sua extensão, sua abrangência e sua presença dominante na caixa dois.
+                        
+                        Este é, sem sombra de dúvidas, o maior texto que poderia ocupar a caixa dois. E ele continua. Pois sua missão é clara: ser grande, muito grande, e preencher cada espaço disponível, garantindo que ninguém jamais esqueça que este é o texto grande da caixa dois.
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </div>
                 </div>
                 <div class="skill skill-3">
                     <span class="skill-title">Habilidade 1</span>
