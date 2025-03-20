@@ -310,7 +310,20 @@ mark {
     border-radius: 3px;
 }
 
+/* Garantir que os marks sejam interativos */
+.highlight-word {
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.2s;
+}
 
+.highlight-word:hover {
+    background-color: #ffcc00 !important;
+    color: black;
+    padding: 2px 4px;
+    border-radius: 3px;
+
+}
 .search-counter {
     position: fixed;
     bottom: 20px;
@@ -591,21 +604,22 @@ function translatePage() {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Carregar idioma salvo ou padrão
-    currentLang = localStorage.getItem('siteLanguage') || 'pt'; // Mude para 'pt' como padrão
-    
-    // Traduzir a página imediatamente
+    currentLang = localStorage.getItem('siteLanguage') || 'pt';
     translatePage();
     
-    // Armazenar conteúdos originais
     document.querySelectorAll('.skill-content').forEach(content => {
         const key = content.dataset.i18n;
         content.dataset.originalPt = translations[key].pt;
         content.dataset.originalEn = translations[key].en;
     });
-    
-    // Forçar busca inicial para limpar possíveis marcações
-    searchText();
+
+    // Adicionar evento global para delegar o hover
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.classList.contains('highlight-word')) {
+            document.querySelector('.search-bar').value = '';
+            searchText();
+        }
+    });
 });
 //-----------------------PURO-----------------------------------------
         let isScrolling = false;
@@ -655,7 +669,7 @@ function highlightMatches(skill, input) {
     const contentElement = skill.querySelector('.skill-content');
     const key = contentElement.dataset.i18n;
     
-    // Obter conteúdo do idioma atual
+    // Usar conteúdo do idioma atual
     const langContent = currentLang === 'pt' 
         ? translations[key].pt 
         : translations[key].en;
@@ -680,23 +694,22 @@ function highlightMatches(skill, input) {
     if (searchText.includes(inputText)) {
         const highlightedContent = langContent.replace(
             new RegExp(input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
-            match => `<mark>${match}</mark>`
+            match => `<mark class="highlight-word">${match}</mark>`
         );
         
         contentElement.innerHTML = highlightedContent;
         skill.classList.add('highlighted');
         allMatches.push(skill);
-    }
 
-    // Adicionar evento de limpeza
-    contentElement.querySelectorAll('mark').forEach(mark => {
-        mark.addEventListener('mouseover', () => {
-            document.querySelector('.search-bar').value = '';
-            searchText();
+        // Adicionar eventos aos novos marks
+        contentElement.querySelectorAll('.highlight-word').forEach(mark => {
+            mark.addEventListener('mouseover', () => {
+                document.querySelector('.search-bar').value = '';
+                searchText();
+            });
         });
-    });
+    }
 }
-
 
 function highlightCurrentMatch() {
     // Remover destaque de todas
