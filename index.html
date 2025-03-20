@@ -45,6 +45,29 @@
     border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
     border: none;
 }
+.ftext {
+    position: absolute;
+    top: 430px;
+    right: 20px;
+    z-index: 1000;
+    
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-align: right;
+    color: white;
+}
+
+.ftext a {
+    color: #ffeb3b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.ftext a:hover {
+    text-decoration: underline;
+}
 
 .search-button {
     position: absolute;
@@ -350,6 +373,14 @@ h1[data-i18n] {
             <div id="languageToggle">
                 <button onclick="toggleLanguage()">EN/PT</button>
             </div>
+            <div class="ftext">
+                <p>
+                    Que tal explorar um pouco? <br>
+                    Veja algo <a href="https://www.wikipedia.org/" target="_blank">interessante</a> ou descubra algo 
+                    <a href="https://www.nasa.gov/" target="_blank">fora deste mundo</a>! 
+                </p>
+            </div>
+            
             <input type="text" class="search-bar" id="searchInput">
             <button class="search-button" onclick="searchText()"></button>
             
