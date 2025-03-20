@@ -56,6 +56,7 @@
             border-radius: 10px;
             font-size: 1.1rem;
             color: white;
+            min-height: 800px;
             max-width: 600px; /* Largura máxima para melhor leitura */
             text-align: right;
             backdrop-filter: blur(5px); /* Efeito de vidro opcional */
@@ -382,8 +383,8 @@ h1[data-i18n] {
                 <p data-i18n="ftext_content"></p>
             </div>
             
-            <input type="text" class="search-bar" id="searchInput">
-            <button class="search-button" onclick="searchText()"></button>
+            <input type="text" class="search-bar" id="searchInput" data-i18n="search_placeholder">
+            <button class="search-button" onclick="searchText()" data-i18n="search_button"></button>
             
             <h1 class="main-title" data-i18n="page1_title"></h1>
             
@@ -546,17 +547,20 @@ function translatePage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.dataset.i18n;
         if (translations[key]) {
-            // Usar innerHTML para elementos que contém HTML
-            if (element.closest('.skill-content') || 
-                element.classList.contains('ftext') || 
-                element.closest('.ftext')) {
+            // Placeholder para inputs
+            if (element.tagName === 'INPUT') {
+                element.placeholder = translations[key][currentLang];
+            }
+            // HTML para elementos específicos
+            else if (element.closest('.skill-content, .ftext')) {
                 element.innerHTML = translations[key][currentLang];
-            } else {
+            }
+            // Texto normal para outros elementos
+            else {
                 element.textContent = translations[key][currentLang];
             }
         }
     });
-    
 }
 // Inicializar tradução ao carregar
 document.addEventListener('DOMContentLoaded', () => {
