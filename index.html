@@ -27,67 +27,70 @@
         }
 
         .page:nth-child(1) { 
-    background: url('images/fundo.jpg') no-repeat center center/cover;
-}
+            background: url('images/fundo.jpg') no-repeat center center/cover;
+        }
 
-.page:nth-child(2) { 
-    background: url('images/fundo2.jpg') no-repeat center center/cover;
-}
+        .page:nth-child(2) { 
+            background: url('images/fundo2.jpg') no-repeat center center/cover;
+        }
 
         .search-bar {
-    position: absolute;
-    top: 500px;
-    left: 150px;
-    width: 180px; /* Reduzi para dar espaço ao botão */
-    height: 40px;
-    padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
-    border: none;
-}
-.ftext {
-    position: absolute;
-    top: 430px;
-    right: 20px;
-    z-index: 1000;
-    
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    text-align: right;
-    color: white;
-}
+            position: absolute;
+            top: 500px;
+            left: 150px;
+            width: 180px; /* Reduzi para dar espaço ao botão */
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
+            border: none;
+        }
+        .ftext {
+            position: absolute; /* Alterado de absolute para fixed */
+            top: 50%; /* Posiciona no meio vertical */
+            right: 40px;
+            transform: translateY(-50%);  /*Centraliza verticalmente */
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            color: white;
+            max-width: 600px; /* Largura máxima para melhor leitura */
+            text-align: right;
+            backdrop-filter: blur(5px); /* Efeito de vidro opcional */
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-.ftext a {
-    color: #ffeb3b;
-    text-decoration: none;
-    font-weight: bold;
-}
+        .ftext a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-.ftext a:hover {
-    text-decoration: underline;
-}
+        .ftext a:hover {
+            text-decoration: underline;
+        }
 
-.search-button {
-    position: absolute;
-    top: 500px;
-    left: 330px; /* 150 + 180 = 330 */
-    width: 100px;
-    height: 40px;
-    padding: 5px 10px;
-    font-size: 16px;
-    border-radius: 0 5px 5px 0; /* Borda arredondada à direita */
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s;
-}
+        .search-button {
+            position: absolute;
+            top: 500px;
+            left: 330px; /* 150 + 180 = 330 */
+            width: 100px;
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 0 5px 5px 0; /* Borda arredondada à direita */
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
 
-.search-button:hover {
-    background-color: #45a049;
-}
+        .search-button:hover {
+            background-color: #45a049;
+        }
 
         .button {
             margin-top: auto;  
@@ -167,10 +170,10 @@
 
         /* Habilidades em retângulos com texto */
         .skill-container {
-    position: relative;
-    width: 100%;
-    height: 100%; /* Para garantir que o container ocupe toda a altura */
-}
+            position: relative;
+            width: 100%;
+            height: 100%; /* Para garantir que o container ocupe toda a altura */
+            }
 
         .skill {
             background-color: rgba(247, 247, 247, 0.099);
