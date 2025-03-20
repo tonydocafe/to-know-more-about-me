@@ -370,7 +370,25 @@ h1[data-i18n] {
     font-size: clamp(2rem, 5vw, 3rem); /* Tamanho fluído entre 2rem e 3rem */
 }
 
+/* Ajuste do título principal */
+.page:first-child .main-title {
+    margin-right: auto; /* Alinha à esquerda */
+    padding-left: 10%; /* Distância da borda esquerda */
+    text-align: left; /* Alinhamento do texto à esquerda */
+    width: 80%; /* Largura do container */
+}
 
+/* Ajuste dos ícones sociais */
+.page:first-child .social-icons {
+    margin-right: auto; /* Alinha à esquerda */
+    padding-left: 35%; /* Mesmo alinhamento do título */
+    align-items: flex-start; /* Ícones alinhados à esquerda */
+}
+
+/* Ajuste do container principal */
+.page:first-child {
+    align-items: flex-start; /* Todo conteúdo alinhado à esquerda */
+}
     </style>
 </head>
 <body>
@@ -547,30 +565,41 @@ function translatePage() {
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.dataset.i18n;
         if (translations[key]) {
-            // Placeholder para inputs
             if (element.tagName === 'INPUT') {
                 element.placeholder = translations[key][currentLang];
             }
-            // HTML para elementos específicos
             else if (element.closest('.skill-content, .ftext')) {
                 element.innerHTML = translations[key][currentLang];
             }
-            // Texto normal para outros elementos
             else {
                 element.textContent = translations[key][currentLang];
             }
         }
     });
+    
+    // Atualizar conteúdo das skills
+    document.querySelectorAll('.skill-content').forEach(content => {
+        content.innerHTML = translations[content.dataset.i18n][currentLang];
+    });
 }
-// Inicializar tradução ao carregar
+
+
+
+// Modifique o evento DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('siteLanguage');
-    if (savedLang) currentLang = savedLang;
+    // Carregar idioma salvo ou padrão
+    currentLang = localStorage.getItem('siteLanguage') || 'en';
+    
+    // Traduzir a página imediatamente
     translatePage();
+    
+    // Armazenar conteúdos originais APÓS a tradução
+    document.querySelectorAll('.skill-content').forEach(content => {
+        const key = content.dataset.i18n;
+        content.dataset.originalPt = translations[key].pt;
+        content.dataset.originalEn = translations[key].en;
+    });
 });
-
-
-
 
 //-----------------------PURO-----------------------------------------
         let isScrolling = false;
@@ -614,12 +643,18 @@ let currentMatchIndex = -1; // Índice da correspondência atual
 let allMatches = []; // Armazena todas as correspondências (skills ou marcas)
 
 
+
+
 function highlightMatches(skill, input) {
     const contentElement = skill.querySelector('.skill-content');
-    const originalContent = contentElement.dataset.original;
-    const contentText = originalContent.toLowerCase();
+    const currentLangContent = currentLang === 'pt' 
+        ? contentElement.dataset.originalPt 
+        : contentElement.dataset.originalEn;
     
-    contentElement.innerHTML = originalContent;
+    contentElement.innerHTML = currentLang === 'pt' 
+        ? translations[contentElement.dataset.i18n].pt 
+        : translations[contentElement.dataset.i18n].en;
+    
     skill.classList.remove('highlighted');
 
     if (!input) {
@@ -627,17 +662,15 @@ function highlightMatches(skill, input) {
         return;
     }
 
-    if (contentText.includes(input)) {
-        const highlightedContent = originalContent.replace(
+    if (currentLangContent.toLowerCase().includes(input.toLowerCase())) {
+        const highlightedContent = currentLangContent.replace(
             new RegExp(input, 'gi'),
             match => `<mark>${match}</mark>`
         );
 
         contentElement.innerHTML = highlightedContent;
         skill.classList.add('highlighted');
-
-        // Coletar todas as skills correspondentes (ou marcas)
-        allMatches.push(skill); // Ou colete as tags <mark> aqui
+        allMatches.push(skill);
     }
 
 
