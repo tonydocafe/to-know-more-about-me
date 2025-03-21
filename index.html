@@ -543,7 +543,7 @@ const translations = {
         "pt": "Habilidade 2"
     },
     "skill3_content": {
-        "en": "Skill 3",
+        "en": "Web development using modern technologies",
         "pt": "Habilidade 3"
     },
     "skill4_content": {
@@ -736,10 +736,21 @@ function highlightCurrentMatch() {
     // Remover destaque de todas
     allMatches.forEach(skill => skill.classList.remove('highlighted'));
     
-    // Destacar a atual
     const currentSkill = allMatches[currentMatchIndex];
     currentSkill.classList.add('highlighted');
-    currentSkill.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    
+
+    // Encontra a página pai do elemento
+    const pageElement = currentSkill.closest('.page');
+    
+    // Rolagem suave para centralizar a página
+    pageElement.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' // Centraliza verticalmente
+    });
+
+    
+    //currentSkill.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 
