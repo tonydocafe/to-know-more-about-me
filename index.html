@@ -220,19 +220,19 @@
         }
 
         .skill-content {
-    opacity: 0;
-    transition: all 0.3s ease;
-    padding: 20px;
-    text-align: justify;
-    /* Novas regras para rolagem */
-    overflow-y: auto;
-    max-height: 200px;
-    width: 100%;
-    pointer-events: auto;
-    margin-top: 10px;
-    font-size: 1rem; /* Tamanho base */
-    line-height: 1.6
-}
+            opacity: 0;
+            transition: all 0.3s ease;
+            padding: 20px;
+            text-align: justify;
+            /* Novas regras para rolagem */
+            overflow-y: auto;
+            max-height: 200px;
+            width: 100%;
+            pointer-events: auto;
+            margin-top: 10px;
+            font-size: 1rem; /* Tamanho base */
+            line-height: 1.6
+        }
 
 /* Personalização da scrollbar */
 .skill-content::-webkit-scrollbar {
@@ -302,21 +302,21 @@
     transform: scale(1);
 }
 
-/* Garante que o mark tenha contraste */
-mark {
-    background-color: #ffeb3b;
-    color: black;
-    padding: 2px 4px;
-    border-radius: 3px;
+/* Remova as regras antigas do mark e adicione: */
+.highlight-text {
+    color: #FF6B6B !important; /* Cor do texto */
+    font-weight: bold;
+    background: none !important;
+    padding: 0;
+    transition: color 0.3s;
 }
 
-/* Garantir que os marks sejam interativos */
-.highlight-word {
-    pointer-events: auto;
+.highlight-text:hover {
+    color: #FF4757 !important; /* Cor mais escura no hover */
+    text-decoration: underline;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.2
 }
-
 .highlight-word:hover {
     background-color: #ffcc00 !important;
     color: black;
@@ -324,7 +324,7 @@ mark {
     border-radius: 3px;
     transition: all 0.2s;
 
-}
+}*/
 .search-counter {
     position: fixed;
     bottom: 20px;
@@ -616,7 +616,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Adicionar evento global para delegar o hover
     document.addEventListener('mouseover', (e) => {
-        if (e.target.classList.contains('highlight-word')) {
+        if (e.target.classList.contains('highlight-text')) {
             document.querySelector('.search-bar').value = '';
             searchText();
         }
@@ -702,7 +702,7 @@ function highlightMatches(skill, input) {
             if (node.nodeType === Node.TEXT_NODE) {
                 const newText = node.textContent.replace(
                     new RegExp(input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
-                    match => `<mark class="highlight-word">${match}</mark>`
+                    match => `<mark class="highlight-text">${match}</mark>`
                 );
                 const wrapper = document.createElement('span');
                 wrapper.innerHTML = newText;
@@ -721,7 +721,7 @@ function highlightMatches(skill, input) {
         allMatches.push(skill);
 
         // Adicionar eventos aos novos marks
-        contentElement.querySelectorAll('.highlight-word').forEach(mark => {
+        contentElement.querySelectorAll('.highlight-text').forEach(mark => {
             mark.addEventListener('mouseover', () => {
                 document.querySelector('.search-bar').value = '';
                 searchText();
