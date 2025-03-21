@@ -34,27 +34,16 @@
             background: url('images/fundo2.jpg') no-repeat center center/cover;
         }
 
-        .search-bar {
-            position: absolute;
-            top: 500px;
-            left: 475px;
-            width: 180px; /* Reduzi para dar espaço ao botão */
-            height: 40px;
-            padding: 5px 10px;
-            font-size: 16px;
-            border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
-            border: none;
-        }
         .ftext-title {
-    font-size: 2.5rem;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    width: 100%;
-    color: #4CAF50; /* Cor verde para destacar */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-        .ftext {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            
+            width: 100%;
+            color: #4CAF50; /* Cor verde para destacar */
+            text-shadow: 2px 2px 4px rgb(255, 255, 255);
+        }
+                .ftext {
             position: absolute; /* Alterado de absolute para fixed */
             top: 50%; /* Posiciona no meio vertical */
             right: 40px;
@@ -82,11 +71,22 @@
         .ftext a:hover {
             text-decoration: underline;
         }
-
+        
+        .search-bar {
+            position: absolute;
+            top: 500px;
+            left: 450px;
+            width: 180px; /* Reduzi para dar espaço ao botão */
+            height: 40px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
+            border: none;
+        }
         .search-button {
             position: absolute;
             top: 500px;
-            left: 650px; /* 150 + 180 = 330 */
+            left: 630px; /* 150 + 180 = 330 */
             width: 100px;
             height: 40px;
             padding: 5px 10px;
@@ -126,7 +126,7 @@
             align-items: center;
             gap: 20px;
             margin-top: 30px;
-            margin-left: -100px;
+            margin-left: -110px;
         }
 
         .social-icon {
@@ -497,7 +497,7 @@ const translations = {
     // Página 1
     "page1_title": {
         "en": "How can I talk to you?",
-        "pt": "Como posso conversar com você?"
+        "pt": "Vamos conversar ?"
     },
     "search_placeholder": {
         "en": "Search...",
