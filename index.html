@@ -56,10 +56,11 @@
             border-radius: 10px;
             font-size: 1.9rem;
             color: white;
+            text-shadow: 2px 2px 4px black;
             min-height: 800px;
             max-width: 600px; /* Largura máxima para melhor leitura */
             text-align: right;
-            backdrop-filter: blur(5px); /* Efeito de vidro opcional */
+            backdrop-filter: blur(10px); /* Efeito de vidro opcional */
             border: 1px solid rgba(255,255,255,0.1);
         }
 
@@ -279,9 +280,9 @@
             transition: opacity 0.3s ease;
         }
 
-        .skill:hover .skill-content span {
+       /* .skill:hover .skill-content span {
             opacity: 0;
-        }
+        }*/
 
 
 
@@ -322,6 +323,7 @@ mark {
     color: black;
     padding: 2px 4px;
     border-radius: 3px;
+    transition: all 0.2s;
 
 }
 .search-counter {
@@ -669,35 +671,53 @@ function highlightMatches(skill, input) {
     const contentElement = skill.querySelector('.skill-content');
     const key = contentElement.dataset.i18n;
     
-    // Usar conteúdo do idioma atual
+    // Obter conteúdo do idioma atual
     const langContent = currentLang === 'pt' 
         ? translations[key].pt 
         : translations[key].en;
 
-    // Converter para texto sem formatação para busca
+    // Criar elemento temporário para extrair texto visível
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = langContent;
-    const searchText = tempDiv.textContent.toLowerCase();
+    
+    // Extrair apenas texto visível (ignorando atributos HTML)
+    const visibleText = tempDiv.textContent.toLowerCase();
     const inputText = input.toLowerCase();
-
-    // Restaurar conteúdo original do idioma
-    contentElement.innerHTML = langContent;
 
     skill.classList.remove('highlighted');
 
     if (!input) {
+        contentElement.innerHTML = langContent; // Restaurar conteúdo original
         skill.style.cssText = '';
         return;
     }
 
-    // Verificar correspondência no texto limpo
-    if (searchText.includes(inputText)) {
-        const highlightedContent = langContent.replace(
-            new RegExp(input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
-            match => `<mark class="highlight-word">${match}</mark>`
-        );
+    // Verificar correspondência apenas no texto visível
+    if (visibleText.includes(inputText)) {
+        // Criar novo elemento para manipulação segura
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(langContent, 'text/html');
         
-        contentElement.innerHTML = highlightedContent;
+        // Função recursiva para marcar texto nos nós
+        const markTextNodes = (node) => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                const newText = node.textContent.replace(
+                    new RegExp(input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'),
+                    match => `<mark class="highlight-word">${match}</mark>`
+                );
+                const wrapper = document.createElement('span');
+                wrapper.innerHTML = newText;
+                node.replaceWith(wrapper);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                Array.from(node.childNodes).forEach(markTextNodes);
+            }
+        };
+
+        // Aplicar marcação apenas nos textos
+        markTextNodes(doc.body);
+        
+        // Atualizar conteúdo mantendo a estrutura HTML original
+        contentElement.innerHTML = doc.body.innerHTML;
         skill.classList.add('highlighted');
         allMatches.push(skill);
 
@@ -708,6 +728,8 @@ function highlightMatches(skill, input) {
                 searchText();
             });
         });
+    } else {
+        contentElement.innerHTML = langContent; // Restaurar se não houver match
     }
 }
 
