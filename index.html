@@ -45,6 +45,15 @@
             border-radius: 5px 0 0 5px; /* Borda arredondada à esquerda */
             border: none;
         }
+        .ftext-title {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+    width: 100%;
+    color: #4CAF50; /* Cor verde para destacar */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
         .ftext {
             position: absolute; /* Alterado de absolute para fixed */
             top: 50%; /* Posiciona no meio vertical */
@@ -413,9 +422,9 @@ h1[data-i18n] {
                 <button onclick="toggleLanguage()">EN/PT</button>
             </div>
             <div class="ftext">
+                <h2 class="ftext-title" data-i18n="ftext_title"></h2>
                 <p data-i18n="ftext_content"></p>
             </div>
-            
             <input type="text" class="search-bar" id="searchInput" data-i18n="search_placeholder">
             <button class="search-button" onclick="searchText()" data-i18n="search_button"></button>
             
@@ -507,7 +516,10 @@ const translations = {
         "pt": "Sobre mim..."
     },
 
-
+    "ftext_title": {
+        "en": "Welcome!",
+        "pt": "Bem-vindo !"
+    },
     "ftext_content": {
     "en": "You are in my portfolio! My name is Tony, and I created this site to showcase my projects, experiences, and interests. Hosted on GitHub, it serves as a gateway to everything I’ve been working on—whether in programming, research, or personal experiments. <br><br> Here, you’ll find links to my repositories, details about my academic and professional journey, and, of course, ways to get in touch with me. If you’re looking for collaboration, inspiration, or just want to explore my work, you’re in the right place! <br><br> I’m always open to new ideas, challenges, and opportunities. So, feel free to explore, and if something catches your attention, don’t hesitate to reach out! 🚀",
     "pt": "Você está no meu portfólio! Me chamo Tony e criei este site para reunir tudo sobre meus projetos, experiências e interesses. Hospedado no GitHub, ele funciona como um ponto de acesso ao que venho desenvolvendo—seja na programação, na pesquisa ou em experimentos pessoais. <br><br> Aqui, você encontrará links para meus repositórios, informações sobre minha trajetória acadêmica e profissional e, claro, formas de entrar em contato comigo. Se você busca colaboração, inspiração ou apenas quer conhecer meu trabalho, está no lugar certo! <br><br> Estou sempre aberto a novas ideias, desafios e oportunidades. Então, explore à vontade e, se algo chamar sua atenção, não hesite em me chamar! 🚀"
