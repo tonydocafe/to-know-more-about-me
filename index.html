@@ -409,27 +409,30 @@ h1[data-i18n] {
 .page:first-child {
     align-items: flex-start; /* Todo conteúdo alinhado à esquerda */
 }
-@media (max-width: 1800px) or (max-height: 900px) {
-    body {
-        display: none; /* Oculta o conteúdo */
-    }
-
+@media (max-width: 1800px), (max-height: 900px) {
     body::before {
-        content: "Por enquanto, este site só pode ser acessado em um notebook ou computador.";
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        content: "Este site funciona melhor em notebooks e computadores!";
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.95);
         color: white;
-        font-size: 2vw;
-        font-weight: bold;
+        font-size: 1.5em;
         padding: 20px;
+        z-index: 9999;
+        pointer-events: none; /* Permite interação com conteúdo abaixo */
+    }
+    
+    /* Mantém o conteúdo visível */
+    body {
+        position: relative;
+        z-index: 1;
     }
 }
 
@@ -923,11 +926,7 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.innerWidth < 1024) {
-        document.body.innerHTML = "<div style='display:flex; align-items:center; justify-content:center; height:100vh; width:100vw; background:black; color:white; font-size:2vw; text-align:center;'>Por enquanto, este site só pode ser acessado em um notebook ou computador.</div>";
-    }
-});
+
     </script>
 </body>
 </html>
