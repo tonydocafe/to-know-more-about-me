@@ -456,25 +456,25 @@ h1[data-i18n] {
             
             <div class="social-icons">
                 <div class="social-icon">
-                    <a href="https://www.instagram.com" target="_blank">
+                    <a href="https://www.instagram.com/oeotony/" target="_blank">
                         <img src="images/insta.png" alt="Instagram">
                     </a>
                     <div class="tooltip" data-i18n="instagram_tooltip"></div>
                 </div>
                 <div class="social-icon">
-                    <a href="https://www.linkedin.com" target="_blank">
+                    <a href="www.linkedin.com/in/tony-jr-07b1a323a" target="_blank">
                         <img src="images/link.png" alt="LinkedIn">
                     </a>
                     <div class="tooltip" data-i18n="linkedin_tooltip"></div>
                 </div>
                 <div class="social-icon">
-                    <a href="https://www.whatsapp.com" target="_blank">
+                    <a href="https://wa.me/5531991730236" target="_blank">
                         <img src="images/wpp.png" alt="WhatsApp">
                     </a>
                     <div class="tooltip" data-i18n="whatsapp_tooltip"></div>
                 </div>
                 <div class="social-icon">
-                    <a href="mailto:example@gmail.com" target="_blank">
+                    <a href="mailto:mneoacme@gmail.com" target="_blank">
                         <img src="images/email.png" alt="Gmail">
                     </a>
                     <div class="tooltip" data-i18n="email_tooltip"></div>
@@ -925,7 +925,19 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
         searchText();
     }
 });
+let resizeTimeout;
 
+window.addEventListener('resize', () => {
+    // Cancela scrolls em andamento
+    isScrolling = false;
+    
+    // Força retorno à página 1 após redimensionamento
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        currentIndex = 0;
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 100); // Ajuste o tempo conforme necessidade
+});
 
     </script>
 </body>
