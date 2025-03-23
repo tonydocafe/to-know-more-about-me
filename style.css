@@ -268,12 +268,6 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     width: 300px;
 }
 
-.skill-content span {
-    display: block;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-}
-
 .skill.highlighted {
     transform: scale(1.7);
     height: 300px;
