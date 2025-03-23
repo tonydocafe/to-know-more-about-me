@@ -56,5 +56,13 @@ function scrollToPage(index) {
     }
 }
 
-
+document.addEventListener('keydown', (e) => {
+    if (allMatches.length === 0) return;
+    if (e.key === 'ArrowLeft') {
+        previousMatch();
+    } 
+    else if (e.key === 'ArrowRight') {
+        nextMatch();
+    }
+});
 
