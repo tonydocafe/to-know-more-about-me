@@ -25,15 +25,36 @@ function searchText() {
         counter.style.display = 'none';
     }
 }
+
 function nextMatch() {
     if (totalMatches === 0) return;
     currentMatchIndex = (currentMatchIndex + 1) % totalMatches;
     highlightCurrentMatch();
     updateCounter();
 }
+
 function previousMatch() {
     if (totalMatches === 0) return;
     currentMatchIndex = (currentMatchIndex - 1 + totalMatches) % totalMatches;
     highlightCurrentMatch();
     updateCounter();
 }
+
+
+let isScrolling = false;
+let currentIndex = 0;
+const pages = document.querySelectorAll(".page");
+function scrollToPage(index) {
+    if (index >= 0 && index < pages.length) {
+        currentIndex = index;
+        window.scrollTo({
+            top: pages[index].offsetTop,
+            behavior: "smooth"
+        });
+        isScrolling = true;
+        setTimeout(() => isScrolling = false, 500);
+    }
+}
+
+
+
