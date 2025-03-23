@@ -4,8 +4,6 @@ function toggleLanguage() {
     localStorage.setItem('siteLanguage', currentLang);
 }
 
-
-
 function searchText() {
     const input = document.querySelector('.search-bar').value.toLowerCase();
     const skills = document.querySelectorAll('.skill');
