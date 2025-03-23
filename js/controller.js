@@ -31,3 +31,9 @@ function nextMatch() {
     highlightCurrentMatch();
     updateCounter();
 }
+function previousMatch() {
+    if (totalMatches === 0) return;
+    currentMatchIndex = (currentMatchIndex - 1 + totalMatches) % totalMatches;
+    highlightCurrentMatch();
+    updateCounter();
+}
