@@ -25,3 +25,9 @@ function searchText() {
         counter.style.display = 'none';
     }
 }
+function nextMatch() {
+    if (totalMatches === 0) return;
+    currentMatchIndex = (currentMatchIndex + 1) % totalMatches;
+    highlightCurrentMatch();
+    updateCounter();
+}
