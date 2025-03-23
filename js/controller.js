@@ -85,32 +85,7 @@ window.addEventListener('resize', () => {
 
 
 window.addEventListener("wheel", (event) => {
-    if (isScrolling) return;
-
-    
-    const expandedSkills = document.querySelectorAll('.skill.highlighted, .skill:hover');
     let isMouseInsideSkill = false;
-
-    expandedSkills.forEach(skill => {
-        // 2. Verificar se o mouse está realmente dentro da skill e se ela está expandida
-        const style = getComputedStyle(skill);
-        const isExpanded = parseFloat(style.width) > 160; // Largura original é 150px
-
-        if (isExpanded && skill.matches(':hover')) {
-            isMouseInsideSkill = true;
-            const skillContent = skill.querySelector('.skill-content');
-            const delta = event.deltaY;
-
-            // 3. Se o conteúdo da skill for rolável, bloquear o scroll da página
-            if (skillContent.scrollHeight > skillContent.clientHeight) {
-                event.preventDefault();
-                event.stopPropagation();
-                skillContent.scrollTop += delta * 0.5;
-            }
-        }
-    });
-
-    // 4. Scroll normal apenas se não estiver em uma skill expandida
     if (!isMouseInsideSkill) {
         if (event.deltaY > 0 && currentIndex < pages.length - 1) {
             scrollToPage(currentIndex + 1);
@@ -118,6 +93,6 @@ window.addEventListener("wheel", (event) => {
             scrollToPage(currentIndex - 1);
         }
     }
-}, { passive: false });
+},);
 
 
