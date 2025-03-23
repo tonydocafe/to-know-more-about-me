@@ -79,3 +79,18 @@ function highlightMatches(skill, input) {
     }
 }
 
+function highlightCurrentMatch() {
+    allMatches.forEach(skill => skill.classList.remove('highlighted'));
+   
+    const currentSkill = allMatches[currentMatchIndex];
+    currentSkill.classList.add('highlighted');
+    
+    const pageElement = currentSkill.closest('.page');
+    pageElement.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center'
+    });
+    
+    setTimeout(() => {
+        scrollToHighlight(currentSkill);
+    }, 30); 
