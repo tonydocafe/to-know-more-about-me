@@ -1,9 +1,3 @@
-const LanguageModel = {
-    getCurrentLanguage() {
-        return localStorage.getItem('siteLanguage') || 'en';
-    }
-};
-
 const translations = {
     // Página 1
     "page1_title": {
