@@ -13,3 +13,9 @@ function translatePage() {
             }
         }
     });
+
+    document.querySelectorAll('.skill-content').forEach(content => {
+        const key = content.dataset.i18n;
+        content.innerHTML = translations[key][currentLang];
+    });
+}
