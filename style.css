@@ -1,0 +1,56 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
+
+.container { display: flex; flex-direction: column; overflow-y: auto; }
+
+.page { 
+    height: 100vh; 
+    width: 100vw; 
+    background: black; 
+    display: flex; 
+    flex-direction: column;  
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+    font-size: 3rem; 
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.page:nth-child(1) { 
+    background: url('images/fundo.jpg') no-repeat center center/cover;
+}
+
+.page:nth-child(2) { 
+    background: url('images/fundo2.jpg') no-repeat center center/cover;
+}
+
+.ftext-title {
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    
+    width: 100%;
+    color: #4CAF50; 
+    text-shadow: 2px 2px 4px rgb(255, 255, 255);
+}
+.ftext {
+    position: absolute; 
+    top: 50%;
+    right: 40px;
+    transform: translateY(-50%); 
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1.9rem;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    min-height: 800px;
+    max-width: 600px; 
+    text-align: right;
+    backdrop-filter: blur(10px); 
+    border: 1px solid rgba(255,255,255,0.1);
+}
