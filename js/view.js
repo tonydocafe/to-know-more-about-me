@@ -91,7 +91,28 @@ function highlightCurrentMatch() {
         behavior: 'smooth', 
         block: 'center' 
     });
+
+    setTimeout(() => {
+    scrollToHighlight(currentSkill);
+    },); 
 }
+
+function scrollToHighlight(skill) {
+    const content = skill.querySelector('.skill-content');
+    const highlight = content.querySelector('.highlight-text');
+    
+    if (highlight) {
+        const highlightTop = highlight.offsetTop - content.offsetTop;
+        const middlePosition = highlightTop - (content.clientHeight / 2);
+        
+        
+        content.scrollTo({
+            top: middlePosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
     
 function updateCounter() {
     const counter = document.getElementById('searchCounter');
