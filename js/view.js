@@ -91,10 +91,6 @@ function highlightCurrentMatch() {
         behavior: 'smooth', 
         block: 'center' 
     });
-
-    setTimeout(() => {
-        scrollToHighlight(currentSkill);
-    }, 30); 
 }
     
 function updateCounter() {
