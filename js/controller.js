@@ -72,3 +72,15 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    isScrolling = false;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+        currentIndex = 0;
+        window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 100); 
+});
+
+
+
