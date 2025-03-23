@@ -357,12 +357,6 @@ h1[data-i18n] {
     align-items: flex-start;
 
 
-.page:first-child {
-    align-items: flex-start; 
-}
-
-
-
 
 @media (max-width: 1800px), (max-height: 900px) {
     body::before {
