@@ -342,9 +342,6 @@ h1[data-i18n] {
     margin: 0 auto 20px;
     word-wrap: break-word;
 }
-.main-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-}
 
 
 .page:first-child .main-title {
