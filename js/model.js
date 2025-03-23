@@ -45,8 +45,8 @@ const translations = {
     "email_tooltip": {
         "en": "Send email",
         "pt": "Enviar e-mail"
-    }
-};
+    },
+
 
     // Página 2
     "page2_title": {
