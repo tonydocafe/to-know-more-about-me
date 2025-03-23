@@ -56,6 +56,12 @@ function scrollToPage(index) {
     }
 }
 
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchText();
+    }
+});
+
 document.addEventListener('keydown', (e) => {
     if (allMatches.length === 0) return;
     if (e.key === 'ArrowLeft') {
