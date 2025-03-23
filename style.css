@@ -335,4 +335,59 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     transform: scale(1.05);
 }
 
+h1[data-i18n] {
+    font-size: 2.5rem; 
+    line-height: 1.2;
+    max-width: 90%;
+    margin: 0 auto 20px;
+    word-wrap: break-word;
+}
+.main-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+}
 
+
+.page:first-child .main-title {
+    margin-right: auto; 
+    padding-left: 10%; 
+    text-align: left; 
+    width: 80%; 
+}
+
+.page:first-child .social-icons {
+    margin-right: auto; 
+    padding-left: 35%;
+    align-items: flex-start;
+
+
+.page:first-child {
+    align-items: flex-start; 
+}
+
+
+
+
+@media (max-width: 1800px), (max-height: 900px) {
+    body::before {
+        content: "Este site funciona melhor em notebooks e computadores!";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.95);
+        color: white;
+        font-size: 1.5em;
+        padding: 20px;
+        z-index: 9999;
+        pointer-events: none;
+}
+body {
+    position: relative;
+    z-index: 1;
+}
+}
