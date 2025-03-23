@@ -97,3 +97,11 @@ function highlightCurrentMatch() {
     }, 30); 
 }
     
+function updateCounter() {
+    const counter = document.getElementById('searchCounter');
+    if(totalMatches === 0) {
+        counter.style.display = 'none';
+        return;
+    }
+    counter.textContent = `${currentMatchIndex + 1}/${totalMatches}`;
+}
