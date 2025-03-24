@@ -361,7 +361,7 @@ h1[data-i18n] {
 
 @media (max-width: 1800px), (max-height: 900px) {
     body::before {
-        content: "Este site funciona melhor em notebooks e computadores!";
+        content: "oops... You are not using a large enough screen, we are working to fix this, come back later or use a laptop or computer...!";
         position: fixed;
         top: 0;
         left: 0;
