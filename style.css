@@ -37,7 +37,7 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     text-shadow: 2px 2px 4px rgb(255, 255, 255);
 }
 .ftext {
-    position: absolute; 
+    position: absolute;
     top: 50%;
     right: 40px;
     transform: translateY(-50%); 
@@ -69,7 +69,7 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
 .search-button {
     position: absolute;
     top: 500px;
-    left: 630px;
+    left: 630px; 
     width: 100px;
     height: 40px;
     padding: 5px 10px;
@@ -152,37 +152,41 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     z-index: 1;
 }
 
-.marquee{
-    position:fixed;
-    bottom: 100px;
-    left:20px;
-    width: 1150px;
-    overflow:hidden;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
-    padding: 10px 5px;
-    box-sizing: border-box;
-    white-space: nowrap;
-    border-radius: 5px;
+
+
+
+
+.marquee {
+  position: fixed;
+  bottom: 100px;            
+  left: 20px;
+  
+  width: 1150px;              
+  overflow: hidden;
+  background: rgba(0,0,0,0.6); 
+  color: #fff;
+  padding: 10px 5px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  border-radius: 5px; 
+}
+
+.marquee__inner {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 130s linear infinite;
+}
+
+.marquee__inner span {
+  display: inline-block;
+  margin-right: 60px;
 }
 
 
-.marquee_inner {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 130s linear infinite;
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
-
-.marquee_inner span {
-    display: inline-block;
-    margin-right:60px;
-}
-
-@keyframes marquee{
-    from {transform: translateX(0);}
-    to {transform:translateX(-100%);}
-}
-
 
 .social-icon:hover {
     width: auto;
@@ -194,23 +198,26 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     opacity: 1;
     transform: scaleX(1);
 }
+
+
 .skill-container {
     position: relative;
     width: 100%;
     height: 100%; 
+  
 }
 
 
 .skill {
-    
+
     width: 350px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.744);
-    
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.744); 
+
     transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
     overflow: hidden;
     position: absolute;
@@ -248,49 +255,53 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     transition: all 0.3s ease;
     padding: 20px;
     text-align: justify;
+    color:#ffffffad;
+
     overflow-y: auto;
     max-height: 200px;
     width: 100%;
     pointer-events: auto;
     margin-top: 10px;
-    font-size: 1rem; 
+    font-size: 1rem;
     line-height: 1.6;
     overscroll-behavior: contain;
     touch-action: pan-y;
     overflow-y: auto !important; 
-    pointer-events: auto !important; 
+    pointer-events: auto !important;
     overscroll-behavior: contain; 
 }
 
 
 .skill-content::-webkit-scrollbar {
-    width: 6px;
+width: 1px;
 }
 
 .skill-content::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
+background: rgba(255, 255, 255, 0.1);
+border-radius: 3px;
 }
 
 .skill-content::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 3px;
+background: rgba(255, 255, 255, 0.4);
+border-radius: 3px;
 }
 
 .skill-content::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.6);
+background: rgba(255, 255, 255, 0.6);
 }
 
 
 .skill:hover .skill-title {
     opacity: 0;
     transform: scale(0.8);
+
 }
 
 
 .skill:hover .skill-content {
     opacity: 1;
     transform: scale(1);
+
 }
 
 
@@ -298,26 +309,29 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     transform: scale(1.7);
     height: 300px;
     width: 300px;
+   
 }
 
+
 .skill.highlighted {
-    transform: scale(1.7);
-    height: 300px;
-    width: 300px;
+transform: scale(1.7);
+height: 300px;
+width: 300px;
 }
 
 .skill.highlighted .skill-title {
-    opacity: 0;
-    transform: scale(0.8);
+opacity: 0;
+transform: scale(0.8);
 }
 
 .skill.highlighted .skill-content {
-    opacity: 1;
-    transform: scale(1);
+opacity: 1;
+transform: scale(1);
 }
 
+
 .highlight-text {
-    color: rgb(75, 221, 92) !important;
+    color: rgb(75, 221, 92) !important; 
     font-weight: bold;
     background: none !important;
     padding: 0;
@@ -361,39 +375,51 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
     transform: scale(1.05);
 }
 
+
 .icon-below-text {
     width: 100px;
     height: 100px;
     margin-top: 20px;
     border-radius: 50%;
     object-fit: cover; 
+    transform-origin: center center;
+    transition: transform 0.6s ease;
 }
 
+
+
 h1[data-i18n] {
-    font-size: 2.5rem; 
+    font-size: 2.5rem;
     line-height: 1.2;
     max-width: 90%;
     margin: 0 auto 20px;
     word-wrap: break-word;
 }
+.main-title {
+    font-size: clamp(2rem, 5vw, 3rem); 
+}
 
 
 .page:first-child .main-title {
-    margin-right: auto; 
-    padding-left: 10%; 
+    margin-right: auto;
+    padding-left: 10%;
     text-align: left; 
-    width: 80%; 
+    width: 80%;
 }
 
+
 .page:first-child .social-icons {
-    margin-right: auto; 
-    padding-left: 35%;
+    margin-right: auto;
+    padding-left: 35%; 
     align-items: flex-start;
 }
 
+
+
+
 @media (max-width: 1800px), (max-height: 900px) {
     body::before {
-        content: "oops... You are not using a large enough screen, we are working to fix this, come back later or use a laptop or computer...!";
+        content: "Este site funciona melhor em notebooks e computadores!";
         position: fixed;
         top: 0;
         left: 0;
@@ -408,8 +434,10 @@ h1[data-i18n] {
         font-size: 1.5em;
         padding: 20px;
         z-index: 9999;
-        pointer-events: none;
+        pointer-events: none; 
 }
+
+
 body {
     position: relative;
     z-index: 1;
