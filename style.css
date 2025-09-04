@@ -202,15 +202,15 @@ body { margin: 0; font-family: Arial, sans-serif; overflow: hidden; }
 
 
 .skill {
-    background-color: rgba(247, 247, 247, 0.099);
-    color:whitesmoke;
+    
     width: 350px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.744);
+    
     transition: transform 0.3s ease, height 0.3s ease, width 0.3s ease;
     overflow: hidden;
     position: absolute;
