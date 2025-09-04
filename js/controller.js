@@ -139,7 +139,7 @@ window.addEventListener("wheel", (event) => {
             scrollToPage(currentIndex - 1);
         }
     }
-}, /*{ passive: false }*/);
+},{ passive: false });
 
 
 
