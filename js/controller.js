@@ -120,3 +120,13 @@ window.addEventListener("wheel", (event) => {
 },);
 
 
+document.addEventListener("DOMContentLoaded", () => {
+    let rotation = 0;
+    const img = document.getElementById("rotatingImage");
+
+    if(img){
+        img.adddEventListerner("click", ()=>{
+            rotation +=360;
+            img.style.transfom = `rotate(${rotation}deg)`;
+        });
+}
