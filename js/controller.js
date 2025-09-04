@@ -2,6 +2,8 @@ function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'pt' : 'en';
     translatePage();
     localStorage.setItem('siteLanguage', currentLang);
+    
+
 }
 
 function searchText() {
@@ -25,7 +27,6 @@ function searchText() {
         counter.style.display = 'none';
     }
 }
-
 function nextMatch() {
     if (totalMatches === 0) return;
     currentMatchIndex = (currentMatchIndex + 1) % totalMatches;
@@ -40,10 +41,10 @@ function previousMatch() {
     updateCounter();
 }
 
-
 let isScrolling = false;
 let currentIndex = 0;
 const pages = document.querySelectorAll(".page");
+
 function scrollToPage(index) {
     if (index >= 0 && index < pages.length) {
         currentIndex = index;
@@ -56,6 +57,18 @@ function scrollToPage(index) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  let rotation = 0;
+  const img = document.getElementById("rotatingImage");
+
+  if (img) {
+    img.addEventListener("click", () => {
+      rotation += 360;
+      img.style.transform = `rotate(${rotation}deg)`;
+    });
+  }
+});
+
 
 document.getElementById('searchInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
@@ -63,15 +76,25 @@ document.getElementById('searchInput').addEventListener('keypress', function(e) 
     }
 });
 
+
+
+
 document.addEventListener('keydown', (e) => {
+   
     if (allMatches.length === 0) return;
+
+    
     if (e.key === 'ArrowLeft') {
         previousMatch();
     } 
+    
     else if (e.key === 'ArrowRight') {
         nextMatch();
     }
 });
+
+
+
 
 
 let resizeTimeout;
@@ -85,22 +108,21 @@ window.addEventListener('resize', () => {
 });
 
 
-
 window.addEventListener("wheel", (event) => {
+  
+
     const expandedSkills = document.querySelectorAll('.skill.highlighted, .skill:hover');
     let isMouseInsideSkill = false;
 
     expandedSkills.forEach(skill => {
-        // Verificar se o mouse está realmente dentro da skill e se ela está expandida
         const style = getComputedStyle(skill);
-        const isExpanded = parseFloat(style.width) > 160; // Largura original é 150px
-
+        const isExpanded = parseFloat(style.width) > 160; 
         if (isExpanded && skill.matches(':hover')) {
             isMouseInsideSkill = true;
             const skillContent = skill.querySelector('.skill-content');
             const delta = event.deltaY;
 
-            // Se o conteúdo da skill for rolável, bloquear o scroll da página
+
             if (skillContent.scrollHeight > skillContent.clientHeight) {
                 event.preventDefault();
                 event.stopPropagation();
@@ -109,7 +131,7 @@ window.addEventListener("wheel", (event) => {
         }
     });
 
-    // Scroll normal apenas se não estiver em uma skill expandida
+
     if (!isMouseInsideSkill) {
         if (event.deltaY > 0 && currentIndex < pages.length - 1) {
             scrollToPage(currentIndex + 1);
@@ -117,16 +139,7 @@ window.addEventListener("wheel", (event) => {
             scrollToPage(currentIndex - 1);
         }
     }
-},);
+}, /*{ passive: false }*/);
 
 
-document.addEventListener("DOMContentLoaded", () => {
-    let rotation = 0;
-    const img = document.getElementById("rotatingImage");
 
-    if(img){
-        img.adddEventListerner("click", ()=>{
-            rotation +=360;
-            img.style.transfom = `rotate(${rotation}deg)`;
-        });
-}
